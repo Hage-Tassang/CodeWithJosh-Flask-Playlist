@@ -1,0 +1,132 @@
+// Color variables
+
+$primary-color: #3498db;
+$primary-hover-color: darken($primary-color, 5%);
+$success-color: #2ecc71;
+$success-hover-color: darken($success-color, 10%);
+$title-color: #2c3e50;
+$bg_color: wheat;
+$text-color: #34495e;
+$secondary_bg_color: #74898f;
+
+
+// for dark more
+$dark-bg-color: #2c3e50;
+$dark-text-color: #ecf0f1;
+$dark-primary-color: #2980b9;
+$dark-success-color: #27ae60;
+$dark-title-color: #ecf0f1;
+
+
+
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: $bg_color;
+}
+
+h1 {
+    color: $title-color;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.content{
+    max-width:800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: $secondary_bg_color;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: $text-color;
+
+    h1{
+        color: $title-color;
+    }
+
+    a{
+        display: inline-block;
+        padding: 10px 15px;
+        margin: 10px 0;
+        border-radius: 5px;
+        background-color: $primary-color;
+        text-decoration: none;
+        color: $dark-title-color;
+        font-weight: bold;
+        font-size: 16px;
+        transition: background-color 0.3s, ease;
+
+        &:hover{
+            color: $primary-hover-color;
+        }
+    }
+
+    button{
+        background-color: $success-color;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+
+        &:hover{
+            background-color: $success-hover-color;
+        }
+    }
+
+    form{
+        margin-top: 20px;
+
+        input[type="text"]{
+            padding: 10px;
+            width: 70%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="submit"]{
+            background-color: $primary-color;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 10px;
+
+            &:hover{
+                background-color: $primary-hover-color;
+            }
+        }
+    }
+
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+
+        th, td{
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th{
+            background-color: $primary-color;
+            color: white;
+        }
+
+        tr:nth-child(even){
+            background-color: #f2f2f2;
+        }
+
+        tr:hover{
+            background-color: #ddd;
+        }
+    }
+
+}
