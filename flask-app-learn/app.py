@@ -48,7 +48,7 @@ def index():
     #see all current tasks
     tasks = MyTask.query.order_by(MyTask.created).all()
     return render_template("index.html", tasks=tasks)
- #https://flask.palletsprojects.com/en/2.3.x/quickstart/#a-minimal-application   
+#https://flask.palletsprojects.com/en/2.3.x/quickstart/#a-minimal-application   
 #delete an item
 @app.route('/delete/<int:id>')
 def delete(id:int):
@@ -81,4 +81,4 @@ if __name__ == "__main__":
     
     
     #run the app in debug mode on port 5000
-    app.run(debug=True)
+    app.run(debug=True,port=4000)
