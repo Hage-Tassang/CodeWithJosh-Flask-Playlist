@@ -1,11 +1,28 @@
 {% extends "base.html" %}
 
-{%block title%}
-{%endblock%}
-{%block heading%}
-<h2>This is updated heading</h2>
-{%endblock%}
-
 {%block body%}
-<p>hello world this is some content for now</p>
+
+<div class="container">
+    <h1 class="my-4 text-center">FastAF News</h1>
+    <div class="row">
+        {%for article in articles%}
+            <div class="col-md-6">
+                <div class="card mb-4 news-article">
+                    {%if article.urlToImage%}
+                    <img src="{{article.urlToImage}}" alt="picture" class="card-img-top">
+                    {%endif%}
+                    <div class="card-body bg-dark text-white">
+                        <p class="card-text text-sm-center">Author: {{article.author}}</p>
+                        <h5 class="card-title"><a href="{{article.url}}" target="blank">{{article.title}}</a></h5>
+                        <p class="card-text">{{article.description}}</p>
+                        
+                    </div>
+                </div>
+            </div>
+        {%endfor%}
+    </div>
+
+</div>
+
+
 {%endblock%}
