@@ -11,22 +11,95 @@
     <body class="bg-info bg-gradient">
         <nav class="navbar navbar-expand-lg bg-dark navbar-light">
             <div class="container-fluid">
-                <a class="navbar-brand text-danger" href="#">FastAF News</a>
+                <a class="navbar-brand text-danger" href="/">FastAF News</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav j ">
                         <li class="nav-item">
-                            <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active text-white" aria-current="page" href="/?query=latest">Home</a>
+                        </li>
+                        
+                        <div class="dropdown">
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle active text-white" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                      Countries
+                                    </a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                              <li><a class="dropdown-item" href="/?query=ae">United Arab Emirates</a></li>
+                              <li><a class="dropdown-item" href="/?query=ar">Argentina</a></li>
+                              <li><a class="dropdown-item" href="/?query=at">Austria</a></li>
+                              <li><a class="dropdown-item" href="/?query=au">Australia</a></li>
+                              <li><a class="dropdown-item" href="/?query=be">Belgium</a></li>
+                              <li><a class="dropdown-item" href="/?query=bg">Bulgaria</a></li>
+                              <li><a class="dropdown-item" href="/?query=br">Brazil</a></li>
+                              <li><a class="dropdown-item" href="/?query=ca">Canada</a></li>
+                              <li><a class="dropdown-item" href="/?query=ch">Switzerland</a></li>
+                              <li><a class="dropdown-item" href="/?query=cn">China</a></li>
+                              <li><a class="dropdown-item" href="/?query=co">Colombia</a></li>
+                              <li><a class="dropdown-item" href="/?query=cu">Cuba</a></li>
+                              <li><a class="dropdown-item" href="/?query=cz">Czechia</a></li>
+                              <li><a class="dropdown-item" href="/?query=de">Germany</a></li>
+                              <li><a class="dropdown-item" href="/?query=eg">Egypt</a></li>
+                              <li><a class="dropdown-item" href="/?query=fr">France</a></li>
+                              <li><a class="dropdown-item" href="/?query=gb">United Kingdom</a></li>
+                              <li><a class="dropdown-item" href="/?query=gr">Greece</a></li>
+                              <li><a class="dropdown-item" href="/?query=hk">Hong Kong</a></li>
+                              <li><a class="dropdown-item" href="/?query=hu">Hungary</a></li>
+                              <li><a class="dropdown-item" href="/?query=id">Indonesia</a></li>
+                              <li><a class="dropdown-item" href="/?query=ie">Ireland</a></li>
+                              <li><a class="dropdown-item" href="/?query=il">Israel</a></li>
+                              <li><a class="dropdown-item" href="/?query=in">India</a></li>
+                              <li><a class="dropdown-item" href="/?query=it">Italy</a></li>
+                              <li><a class="dropdown-item" href="/?query=jp">Japan</a></li>
+                              <li><a class="dropdown-item" href="/?query=kr">South Korea</a></li>
+                              <li><a class="dropdown-item" href="/?query=lt">Lithuania</a></li>
+                              <li><a class="dropdown-item" href="/?query=lv">Latvia</a></li>
+                              <li><a class="dropdown-item" href="/?query=ma">Morocco</a></li>
+                              <li><a class="dropdown-item" href="/?query=mx">Mexico</a></li>
+                              <li><a class="dropdown-item" href="/?query=my">Malaysia</a></li>
+                              <li><a class="dropdown-item" href="/?query=ng">Nigeria</a></li>
+                              <li><a class="dropdown-item" href="/?query=nl">Netherlands</a></li>
+                              <li><a class="dropdown-item" href="/?query=no">Norway</a></li>
+                              <li><a class="dropdown-item" href="/?query=nz">New Zealand</a></li>
+                              <li><a class="dropdown-item" href="/?query=ph">Philippines</a></li>
+                              <li><a class="dropdown-item" href="/?query=pl">Poland</a></li>
+                              <li><a class="dropdown-item" href="/?query=pt">Portugal</a></li>
+                              <li><a class="dropdown-item" href="/?query=ro">Romania</a></li>
+                              <li><a class="dropdown-item" href="/?query=rs">Serbia</a></li>
+                              <li><a class="dropdown-item" href="/?query=ru">Russia</a></li>
+                              <li><a class="dropdown-item" href="/?query=sa">Saudi Arabia</a></li>
+                              <li><a class="dropdown-item" href="/?query=se">Sweden</a></li>
+                              <li><a class="dropdown-item" href="/?query=sg">Singapore</a></li>
+                              <li><a class="dropdown-item" href="/?query=si">Slovenia</a></li>
+                              <li><a class="dropdown-item" href="/?query=sk">Slovakia</a></li>
+                              <li><a class="dropdown-item" href="/?query=th">Thailand</a></li>
+                              <li><a class="dropdown-item" href="/?query=tr">Turkey</a></li>
+                              <li><a class="dropdown-item" href="/?query=tw">Taiwan</a></li>
+                              <li><a class="dropdown-item" href="/?query=ua">Ukraine</a></li>
+                              <li><a class="dropdown-item" href="/?query=us">United States</a></li>
+                              <li><a class="dropdown-item" href="/?query=ve">Venezuela</a></li>
+                              <li><a class="dropdown-item" href="/?query=za">South Africa</a></li>
+                            </ul>
+
+                        </div>
+
+                        <li class="nav-item">
+                            <a class="nav-link active text-white" aria-current="page" href="/?query=world">World</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Countries</a>
+                            <a class="nav-link active text-white" aria-current="page" href="/?trends=popularity">Trending</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">About</a>
-                        </li>
+                        
                     </ul>
+                     <div class="container-fluid">
+                       <form class="d-flex">
+                          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                          <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </nav>

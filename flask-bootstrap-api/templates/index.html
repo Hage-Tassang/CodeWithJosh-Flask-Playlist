@@ -2,8 +2,40 @@
 
 {%block body%}
 
+<style>
+    .neon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    margin: 20px 0;
+    width: auto;
+    border-radius: 6px;
+    background: #272727;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+}
+
+.neon-text {
+    font-size: 4rem;
+    color: #fff;
+    text-shadow: 0 0 5px #ff005e, 0 0 10px #ff005e, 0 0 20px #ff005e, 0 0 40px #ff005e, 0 0 80px #ff005e;
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 5px #ff005e, 0 0 10px #ff005e, 0 0 20px #ff005e, 0 0 40px #ff005e, 0 0 80px #ff005e;
+    }
+    100% {
+        text-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff, 0 0 40px #00d4ff, 0 0 80px #00d4ff, 0 0 160px #00d4ff;
+    }
+}
+</style>
 <div class="container">
-    <h1 class="my-4 text-center">FastAF News</h1>
+    <div class="neon-container">
+        <h1 class="neon-text">FastAF News</h1>
+    </div>
     <div class="row">
         {%for article in articles%}
             <div class="col-md-6">
