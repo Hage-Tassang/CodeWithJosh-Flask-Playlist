@@ -1,0 +1,80 @@
+//colors variables
+$primary-color: #d3d024;
+$background-color: #39393a;
+//font variables
+$font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+//font colors
+$font-color: #333;
+$font-color-light: #cac6c6;
+//button colors
+$btn-bg-color: #4a90e2;
+$btn-font-color: #fff;
+
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background:$primary-color;
+    box-sizing: border-box;
+    }
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 380px;
+    padding: 1rem;
+    border-color: #333;
+    height: 450px;
+    background-color: #39393a;
+    margin: 5rem auto;
+    border-radius: 8px;
+    }
+
+header{
+    text-align: center;
+    margin-bottom: 2rem;
+    width: 100%;
+    color:$font-color;
+    }
+
+.panel {
+    background: $background-color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    text-align: center;
+    max-width: 360px;
+    width: 100%;
+    margin: auto;
+    }
+
+h1 { margin: 0 0 0.5rem 0; font-size: 1.25rem; }
+h2 { margin: 0 0 1rem 0; font-size: 1rem; color: $font-color-light; }
+p { margin: 0 0 1rem 0; color: $font-color-light; }
+.btn-logout { color: $btn-font-color; text-decoration: none; font-weight: 500;border-radius:4px; background-color: $btn-bg-color;}
+.btn-login {
+    background-color: $btn-bg-color;
+    color: $btn-font-color;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    }
+.btn-login {
+    color: $btn-font-color;
+    text-decoration: none;
+    font-weight: 500;
+    }
+
+.input-field{
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    }

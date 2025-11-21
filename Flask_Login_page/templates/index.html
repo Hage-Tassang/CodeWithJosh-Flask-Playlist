@@ -3,22 +3,54 @@
 
     <div class= "container">
         <h2>Welcome to the Flask Authentication Demo!</h2>
-        <form action="">
+        <form id="auth-form" action="{{url_for('login')}}" method = "post">
             <input 
                 type="text"
                 name="username"
                 placeholder="username"
                 class="input-field"
             />
+            <br>
             <input 
                 type="password"
                 name="password"
                 placeholder="password"
                 class="input-field"
             />
-            <input type="submit" value="Login" class="btn btn-login">
-            <input type="button" value="Register" class="btn btn-login">
+            <hr>
+            <input 
+                type="submit" 
+                value="Login" 
+                class="btn btn-login" 
+                onclick = "setActionForm('login')"
+            />  
+            <input 
+                type="button" 
+                value="Register" 
+                class="btn btn-login"
+                onclick = "setActionForm('register')"
+            />
         </form>
+        {%if message%}
+            <p class="message">{{message}}</p>
+        {%endif%}
     </div>
+    
+<script>
+    /*function to check the action form for login and register buttons*/
+    function setActionForm(action){
+        let form = document.getElementById('auth-form');
+        if (action ==='login'){
+            form.action = "{{url_for('login')}}";
+            form.method = "post";
+            form.submit();
+        } else if (action ==='register'){
+            form.action = "{{url_for('register')}}";
+            form.method = "post";
+            form.submit();
+        }
+        
+    }
+</script>
 
 {%endblock%}
