@@ -1,5 +1,5 @@
 //colors variables
-$primary-color: #d3d024;
+$primary-color:hwb(101 61% 7%);
 $background-color: #39393a;
 //font variables
 $font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
@@ -50,9 +50,10 @@ header{
     max-width: 360px;
     width: 100%;
     margin: auto;
+    color: $font-color-light;
     }
 
-h1 { margin: 0 0 0.5rem 0; font-size: 1.25rem; }
+h1 { margin: 0 0 0.5rem 0; font-size: 1.25rem; color: $font-color-light;}
 h2 { margin: 0 0 1rem 0; font-size: 1rem; color: $font-color-light; }
 p { margin: 0 0 1rem 0; color: $font-color-light; }
 .btn-logout { color: $btn-font-color; text-decoration: none; font-weight: 500;border-radius:4px; background-color: $btn-bg-color;}
@@ -64,6 +65,7 @@ p { margin: 0 0 1rem 0; color: $font-color-light; }
     border-radius: 4px;
     font-size: 1rem;
     cursor: pointer;
+    
     }
 .btn-login {
     color: $btn-font-color;
@@ -78,3 +80,4 @@ p { margin: 0 0 1rem 0; color: $font-color-light; }
     border-radius: 4px;
     font-size: 1rem;
     }
+

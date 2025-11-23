@@ -1,6 +1,6 @@
 body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: #d3d024;
+  background: hsl(101, 69.5652173913%, 77%);
   box-sizing: border-box;
 }
 
@@ -38,6 +38,7 @@ header {
   max-width: 360px;
   width: 100%;
   margin: auto;
+  color: #cac6c6;
 }
 
 h1 {
