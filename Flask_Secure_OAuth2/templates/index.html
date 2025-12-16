@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block body %}
+
 <div class="container">
     <form id="auth-form" action="{{ url_for('login') }}" method="post">
         <div class="align-buttons">
@@ -8,13 +9,15 @@
         <br>
         <input type="password" name="password" placeholder="Password" autocomplete="off">
         <br>
-        <input type="submit" value="Login" onclick="setFormAction('login')" class="login-btn">
-        <br>
+        <input type="submit" value="Login" onclick="setFormAction('login')" class="login-btn"> 
+        <p>Or</p>
         <input type="button" value="Register" onclick="setFormAction('register')" class="login-btn">
-    </form>
         </div>
-        
+    </form>
+    <br>
+    <input type="button" class="google login-btn" value="Login With Google"  onclick="window.location.href='{{url_for('google_login')}}'">  
 </div>
+   
 
 <script>
     function setFormAction(action) {

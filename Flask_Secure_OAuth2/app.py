@@ -1,6 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
+from secret_var import api_key
+from authlib.integrations.flask_client import OAuth
+import secrets
+
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Change this to a random secret key
@@ -9,6 +13,20 @@ app.secret_key = 'your_secret_key'  # Change this to a random secret key
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+#configuring OAuth
+oauth = OAuth(app)
+#Google OAuth configuration
+googlee = oauth.register(
+    name='google',
+    client_id=api_key.CLIENT_ID,
+    client_secret = api_key.CLIENT_SECRET,
+    server_metadata_url = "https://accounts.google.com/.well-known/openid-configuration",
+    client_kwargs = {'scope':'openid profile email'}
+)
+
+
+
 
 class User(db.Model):
     """User Model
@@ -21,12 +39,14 @@ class User(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), unique=True, nullable=False)
-    password_hash = db.Column(db.String(150), nullable=False)
+    password_hash = db.Column(db.String(150), nullable=True)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
+        if not self.password_hash:
+            return False
         return check_password_hash(self.password_hash, password)
 
 
@@ -89,8 +109,47 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('home'))
 
-if __name__ in '__main__':
+
+#login for google 
+@app.route('/login/google')
+def google_login():
+    try:
+        redirect_uri = url_for('authorize_google',_external=True)
+        return googlee.authorize_redirect(redirect_uri)
+    except Exception as e:
+        app.logger.error(f'Error during login:{str(e)}')
+        return "Error occured during login"
+
+
+#Authorize google
+@app.route('/authorize/google')
+def authorize_google():
+    token = googlee.authorize_access_token()
+    userinfo_endpoint = googlee.server_metadata['userinfo_endpoint']
+    resp = googlee.get(userinfo_endpoint)
+    user_info = resp.json()
+    username = user_info['email']
+
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        user = User(username=username)
+        # assign a random password hash for OAuth users to satisfy DB constraints
+        random_pw = secrets.token_urlsafe(16)
+        user.set_password(random_pw)
+        db.session.add(user)
+        db.session.commit()
+
+
+    session['username'] = username
+    session['oauth_token'] = token
+
+    return redirect(url_for('dashboard'))
+
+
+if __name__ == '__main__':
     # Create a db and table
     with app.app_context():
         db.create_all()
     app.run(debug=True)
+
+
