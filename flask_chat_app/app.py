@@ -35,7 +35,7 @@ class Config:
                 'Music',
                 'Movies',
                 'Brain Rot',
-        ]
+    ]
 
 # Setting the flask app and socketio
 app = Flask(__name__)
@@ -95,13 +95,13 @@ def connect():
         logger.info(f"Generated random username at time:{datetime.now().isoformat()} with name: {session['username']}")
 
     except Exception as e:
-        logger.error(f"Error during connection: {e}")
+        logger.error(f"Error during connection: {str(e)}")
         return False
 
 #Disconnect user from current session or chat
 
 @socketIO.event('disconnect')
-def Disconnect():
+def disconnect():
     try:
         if request.sid in active_users:
             username  = active_users[request.sid] ['username']  
@@ -114,12 +114,115 @@ def Disconnect():
         logger.info(f"user disconnected at time:{datetime.now().isoformat()} with name: {username}")
 
     except Exception as e:
-        logger.error(f"Disconnection error: {e}")
+        logger.error(f"Disconnection error: {str(e)}")
         return False
 
+#Join room event
+@socketIO.on('join')
+def on_join(data:dict):
+    try:
+        username = session['username']
+        room = data['room']
+
+        if room not in Config.CHAT_ROOMS:
+            logger.warning(f"Attempt to join invalid room: {room}")
+            return False
+
+        join_room(room)
+        active_users[request.sid]['room'] = room
+
+        emit('status',{
+            'msg': f"{username} has entered the room.",
+            'type': 'join',
+            'timestamp': datetime.now().isoformat()
+        }, room=room)
+
+        logger.info(f"{username} joined room: {room} at {datetime.now().isoformat()}")
+
+    except Exception as e:
+        logger.error(f"Error joining room: {str(e)}")
+        return False
+    
+#Leave room event
+@socketIO.on('leave')
+def on_leave(data:dict):
+    try:
+        username = session['username']
+        room = data['room']
+        leave_room(room)
+
+        if request.sid in active_users and 'room' in active_users[request.sid]:
+            active_users[request.sid].pop('room',None)
+
+        emit('status',{
+            'msg': f"{username} has left the room.",
+            'type': 'leave',
+            'timestamp': datetime.now().isoformat()
+        }, room=room)
+
+        logger.info(f"{username} left room: {room} at {datetime.now().isoformat()}")
+
+    except Exception as e:
+        logger.error(f"Error leaving room: {str(e)}")
+        return False
+
+#Handle Message event
+@socketIO.event
+def handle_message(data:dict):
+    try:
+        username = session['username']
+        room = data.get('room','General')
+        msg_type = data.get('type','message')
+        message = data.get('msg','').strip()
+
+        if not message:
+            return
+        
+        timestamp = datetime.now().isoformat()
+
+        if msg_type == 'private':
+            target_user = data.get('target')
+            if not target_user:
+                logger.warning("Private message without target user.")
+                return
+            
+        for sid, user_data in active_users.items():
+            if user_data['username'] == target_user:
+                emit('private_message',{
+                    'msg': message,
+                    'from': username,
+                    'timestamp': timestamp,
+                    'type': 'private',
+                    'to': target_user
+                }, room=sid)
+                logger.info(f"Private message from {username} to {target_user} at {timestamp}")
+                return
+            
+        else:
+            if room not in Config.CHAT_ROOMS:
+                logger.warning(f"Attempt to send message to invalid room: {room}")
+                return
+            emit('message',{
+                'msg': message,
+                'username': username,
+                'timestamp': timestamp,
+                'room': room,
+            }, room=room)
+
+            logger.info(f"Message from {username} in room {room} at {timestamp}")
+
+    except Exception as e:
+        logger.error(f"Error handling message: {str(e)}")
 
 
 # __name__ == '__main__' means that the script is being run directly and not imported as a module
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    socketIO.run(
+        app,
+        host = '0.0.0.0',
+        debug = app.config['DEBUG'],
+        use_reloader =  app.config['DEBUG']
+    )
+    
 
